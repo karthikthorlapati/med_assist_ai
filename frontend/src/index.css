@@ -1,0 +1,509 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #060d0e;
+  --bg-gradient: radial-gradient(circle at top left, #0e2224, #050a0b);
+  --surface: rgba(20, 38, 41, 0.55);
+  --surface-hover: rgba(26, 49, 53, 0.7);
+  --ink: #eaf2f2;
+  --muted: #839d9f;
+  --primary: #2ea39a;
+  --primary-hover: #3bc2b7;
+  --accent: #25d366;
+  --border: rgba(46, 163, 154, 0.18);
+  --border-focus: rgba(46, 163, 154, 0.5);
+  --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  --radius-lg: 16px;
+  --radius-md: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  background-image: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+
+header h1 {
+  font-family: 'Source Serif 4', serif;
+  font-size: 2.8rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #eaf2f2, #75c5be);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 0 0.5rem;
+}
+
+header .tagline {
+  color: var(--muted);
+  font-size: 1.05rem;
+  max-width: 50ch;
+  margin: 0 auto;
+}
+
+/* calming heartbeat pulse line under header */
+header::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 24px;
+  margin-top: 1.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 24' preserveAspectRatio='none'%3E%3Cpath d='M0 12 H110 L120 2 L132 22 L142 12 H300' fill='none' stroke='%232fa39a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 260px 24px;
+  opacity: 0.6;
+}
+
+/* Dashboard Layout */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: 1.2fr 1fr;
+  }
+}
+
+.main-panel, .side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Glassmorphism Cards */
+.symptom-form,
+.triage-result,
+.hospital-locator,
+.triage-history {
+  background: var(--surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.symptom-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.symptom-form label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.symptom-form textarea {
+  font-family: inherit;
+  font-size: 1.05rem;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: rgba(10, 20, 22, 0.8);
+  color: var(--ink);
+  resize: vertical;
+  min-height: 120px;
+}
+
+.symptom-form textarea:focus {
+  outline: none;
+  border-color: var(--primary-hover);
+  box-shadow: 0 0 0 3px rgba(46, 163, 154, 0.25);
+  background: rgba(10, 20, 22, 0.95);
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+/* Buttons Styling */
+button {
+  font-family: inherit;
+  font-size: 0.98rem;
+  font-weight: 600;
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  border: none;
+  background: var(--primary);
+  color: #0c181a;
+  cursor: pointer;
+  box-shadow: 0 4px 14px 0 rgba(46, 163, 154, 0.25);
+}
+
+button:hover:not(:disabled) {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px 0 rgba(46, 163, 154, 0.4);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.voice-btn {
+  background: transparent;
+  color: var(--primary);
+  border: 1.5px solid var(--border);
+  box-shadow: none;
+}
+
+.voice-btn:hover:not(:disabled) {
+  background: rgba(46, 163, 154, 0.08);
+  border-color: var(--primary-hover);
+}
+
+@keyframes voice-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(230, 81, 0, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(230, 81, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(230, 81, 0, 0); }
+}
+
+.voice-btn.listening {
+  background: rgba(230, 81, 0, 0.15);
+  color: #ff8a65;
+  border-color: #ff8a65;
+  animation: voice-pulse 1.5s infinite;
+}
+
+.voice-unsupported {
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Triage Results Card */
+.triage-result {
+  border-left: 6px solid var(--border);
+}
+
+.triage-result h2 {
+  margin-top: 0;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.triage-result .summary {
+  font-size: 1.1rem;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+  background: rgba(10, 20, 22, 0.4);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.triage-result h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.triage-result ul {
+  padding-left: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.triage-result li {
+  margin-bottom: 0.6rem;
+  font-size: 1.05rem;
+}
+
+.locator-hint {
+  font-size: 0.95rem;
+  color: var(--primary-hover);
+  background: rgba(46, 163, 154, 0.06);
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  display: inline-block;
+  margin-bottom: 1rem;
+  border: 1px dashed rgba(46, 163, 154, 0.25);
+}
+
+.disclaimer {
+  font-size: 0.85rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+/* Hospital Locator Panel */
+.hospital-locator h3 {
+  margin-top: 0;
+  font-size: 1.3rem;
+  color: var(--ink);
+}
+
+.facility-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.facility-list li {
+  padding: 1rem;
+  background: rgba(10, 20, 22, 0.4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.facility-list li:hover {
+  background: rgba(10, 20, 22, 0.65);
+  border-color: var(--primary-hover);
+}
+
+.facility-list li strong {
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.facility-list li .facility-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.facility-list li .facility-type {
+  background: rgba(46, 163, 154, 0.15);
+  color: var(--primary-hover);
+  padding: 0.1rem 0.5rem;
+  border-radius: 4px;
+  text-transform: capitalize;
+}
+
+.facility-list li .facility-address {
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.facility-list li .facility-phone {
+  font-size: 0.92rem;
+  color: var(--primary-hover);
+}
+
+.facility-list li .facility-actions {
+  display: flex;
+  margin-top: 0.5rem;
+}
+
+.map-link {
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #0c181a;
+  background: var(--primary);
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.map-link:hover {
+  background: var(--primary-hover);
+}
+
+/* History Component styling */
+.triage-history {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.75rem;
+}
+
+.history-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.refresh-btn {
+  font-size: 0.85rem;
+  padding: 0.4rem 1rem;
+  box-shadow: none;
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--border);
+}
+
+.refresh-btn:hover:not(:disabled) {
+  background: rgba(46, 163, 154, 0.08);
+  box-shadow: none;
+}
+
+.empty-history {
+  text-align: center;
+  padding: 2rem 0;
+  color: var(--muted);
+}
+
+.empty-history p {
+  margin: 0 0 0.5rem;
+}
+
+.empty-history .subtext {
+  font-size: 0.82rem;
+  max-width: 32ch;
+  margin: 0 auto;
+}
+
+.history-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-height: 450px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.history-timeline::-webkit-scrollbar {
+  width: 6px;
+}
+
+.history-timeline::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.history-timeline::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+.history-item {
+  background: rgba(10, 20, 22, 0.35);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+}
+
+.history-item:hover {
+  background: rgba(10, 20, 22, 0.5);
+  border-color: var(--primary-hover);
+}
+
+.history-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  border-bottom: 1px dashed rgba(46, 163, 154, 0.12);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.history-date {
+  font-weight: 500;
+}
+
+.history-method {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}
+
+.history-badge {
+  font-weight: 600;
+  margin-left: auto;
+}
+
+.history-body p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.history-symptoms {
+  color: var(--ink);
+  font-style: italic;
+}
+
+.history-summary {
+  color: var(--muted);
+}
+
+.error {
+  color: #ff5252;
+  font-weight: 500;
+  background: rgba(255, 82, 82, 0.1);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 82, 82, 0.2);
+  margin: 0.5rem 0;
+}
+
+footer {
+  text-align: center;
+  margin-top: 4rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+

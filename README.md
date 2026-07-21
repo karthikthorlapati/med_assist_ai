@@ -13,7 +13,7 @@ AI-powered triage assistant for people who need to quickly decide: self-care, vi
 ## How it works
 1. User describes symptoms (text or voice) in the React app.
 2. Frontend calls `/api/triage` on the Express backend.
-3. Backend calls Google's Gemini API (free tier, no billing required) with a carefully designed prompt to classify urgency (`self-care` / `visit-facility` / `emergency`) and generate a first-aid response.
+3. Backend calls Groq's API (free tier, no billing required) with a carefully designed prompt to classify urgency (`self-care` / `visit-facility` / `emergency`) and generate a first-aid response.
 4. If tier is `visit-facility` or `emergency`, frontend calls `/api/hospitals` with the user's geolocation to find nearby facilities (via OpenStreetMap Overpass API — free, no key needed).
 5. Every session is logged to MongoDB (symptom text, tier, timestamp) — useful for your demo video and shows real DB usage.
 
@@ -31,17 +31,17 @@ medassist-ai/
 cd backend
 npm install
 cp .env.example .env
-# Fill in MONGODB_URI and GEMINI_API_KEY in .env
+# Fill in MONGODB_URI and GROQ_API_KEY in .env
 npm run dev
 ```
 
-**Getting a free Gemini API key (no credit card needed):**
-1. Go to [aistudio.google.com](https://aistudio.google.com)
-2. Sign in with a Google account
-3. Click "Get API key" → "Create API key"
-4. Paste it into `GEMINI_API_KEY` in your `.env`
+**Getting a free Groq API key (no credit card needed):**
+1. Go to [console.groq.com](https://console.groq.com)
+2. Sign in / create an account
+3. Go to "API Keys" → "Create API Key"
+4. Paste it into `GROQ_API_KEY` in your `.env`
 
-The free tier covers 250 requests/day on Gemini 2.5 Flash — more than enough for building, testing, and demoing.
+Groq's free tier is generous and fast — more than enough for building, testing, and demoing.
 
 ### 2. Frontend
 ```bash
@@ -53,7 +53,7 @@ npm run dev
 Frontend runs on `http://localhost:5173`, backend on `http://localhost:5000`. The frontend is pre-configured to call the backend at `http://localhost:5000` in dev — update `frontend/src/utils/api.js` with your deployed backend URL before deploying.
 
 ## Deployment (for submission)
-- **Backend:** Render or Railway (Node service). Add `MONGODB_URI` and `GEMINI_API_KEY` as environment variables there.
+- **Backend:** Render or Railway (Node service). Add `MONGODB_URI` and `GROQ_API_KEY` as environment variables there.
 - **Database:** MongoDB Atlas free tier — create a cluster, get the connection string, put it in `MONGODB_URI`.
 - **Frontend:** Vercel — set `VITE_API_URL` to your deployed backend URL.
 

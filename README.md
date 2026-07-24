@@ -57,11 +57,10 @@ Frontend runs on `http://localhost:5173`, backend on `http://localhost:5000`. Th
 - **Database:** MongoDB Atlas free tier — create a cluster, get the connection string, put it in `MONGODB_URI`.
 - **Frontend:** Vercel — set `VITE_API_URL` to your deployed backend URL.
 
-## What to highlight in your demo video
+
 - The AI triage decision happening live (show all 3 tiers if you can — try a mild symptom, a moderate one, an emergency one).
 - The first-aid guidance being *generated*, not hardcoded.
 - The hospital locator pulling real nearby data based on location.
 - (Bonus) Voice input working end-to-end.
 
-## Important: this is a hackathon prototype, not a medical device
-The AI gives guidance, not diagnosis. Say this explicitly in your problem statement / demo — judges will respect the honesty, and it's the responsible thing to do for a health tool.
+

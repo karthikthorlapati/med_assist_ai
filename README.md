@@ -58,9 +58,3 @@ Frontend runs on `http://localhost:5173`, backend on `http://localhost:5000`. Th
 - **Frontend:** Vercel — set `VITE_API_URL` to your deployed backend URL.
 
 
-- The AI triage decision happening live (show all 3 tiers if you can — try a mild symptom, a moderate one, an emergency one).
-- The first-aid guidance being *generated*, not hardcoded.
-- The hospital locator pulling real nearby data based on location.
-- (Bonus) Voice input working end-to-end.
-
-
